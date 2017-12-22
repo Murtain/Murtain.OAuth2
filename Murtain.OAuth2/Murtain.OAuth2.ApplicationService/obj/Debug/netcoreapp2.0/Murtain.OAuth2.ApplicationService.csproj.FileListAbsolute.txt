@@ -1,0 +1,17 @@
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.deps.json
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Core.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.SDK.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Core.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.SDK.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\bin\Debug\netcoreapp2.0\Murtain.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.csprojResolveAssemblyReference.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.csproj.CoreCompileInputs.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.AssemblyInfoInputs.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.AssemblyInfo.cs
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.ApplicationService\obj\Debug\netcoreapp2.0\Murtain.OAuth2.ApplicationService.pdb

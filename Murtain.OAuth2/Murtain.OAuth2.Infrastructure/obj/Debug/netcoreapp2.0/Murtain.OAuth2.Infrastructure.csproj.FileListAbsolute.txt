@@ -1,0 +1,15 @@
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.deps.json
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.EntityFramework.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.EntityFramework.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.pdb
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.csprojResolveAssemblyReference.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.csproj.CoreCompileInputs.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.AssemblyInfoInputs.cache
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.AssemblyInfo.cs
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Infrastructure\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Infrastructure.pdb

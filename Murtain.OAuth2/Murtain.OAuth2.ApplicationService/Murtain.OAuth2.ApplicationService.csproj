@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Murtain\src\Murtain\Murtain.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.Core\Murtain.OAuth2.Core.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.SDK\Murtain.OAuth2.SDK.csproj" />
+  </ItemGroup>
+
+</Project>

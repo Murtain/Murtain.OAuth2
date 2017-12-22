@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="2.0.6" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Account\LoggedOut.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Account\Logout.cshtml" />
+    <None Include="Views\Consent\Index.cshtml" />
+    <None Include="Views\Consent\_ScopeListItem.cshtml" />
+    <None Include="Views\Grants\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationSummary.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Murtain\src\Murtain.AutoMapper\Murtain.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\..\Murtain\src\Murtain.EntityFramework\Murtain.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\..\Murtain\src\Murtain\Murtain.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.ApplicationService\Murtain.OAuth2.ApplicationService.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.Core\Murtain.OAuth2.Core.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.Domain\Murtain.OAuth2.Domain.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.Infrastructure\Murtain.OAuth2.Infrastructure.csproj" />
+    <ProjectReference Include="..\Murtain.OAuth2.SDK\Murtain.OAuth2.SDK.csproj" />
+  </ItemGroup>
+
+</Project>

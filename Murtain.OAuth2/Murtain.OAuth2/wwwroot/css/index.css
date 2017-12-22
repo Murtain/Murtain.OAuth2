@@ -1,0 +1,684 @@
+﻿
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Myriad Set Pro", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 17px;
+    font-weight: 100 !important;
+    height: 100%;
+    line-height: 1.42857;
+    color: #333333;
+    background-color: #fff;
+    background: url(../images/blur.jpg);
+    background-repeat: no-repeat;
+}
+
+ul {
+    list-style: none;
+}
+
+a:hover {
+    color: #406dd6;
+}
+
+a {
+    color: #5079d9;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 100 !important;
+}
+
+
+pre {
+    display: block;
+    padding: 10px;
+    margin: 0 0 10px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #4CAF50;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #3a312c;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 100;
+}
+
+.form-group {
+    width: 414px;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.form-control {
+    box-shadow: none;
+    width: 275px;
+    margin-top: 5px;
+}
+
+.popover {
+    min-width: 375px;
+}
+
+.popover-title {
+    background: none;
+    border-bottom: none;
+    padding-top: 15px;
+}
+
+.popover-footer {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.popover-footer a {
+    text-align: right;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 2px;
+    background-color: rgba(0,0,0,.2);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-track {
+    width: 5px;
+}
+
+::-webkit-scrollbar:hover {
+    background-color: transparent;
+}
+
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+    display: none !important;
+}
+
+ng\:form {
+    display: block;
+}
+
+.ng-animate-block-transitions {
+    transition: 0s all !important;
+    -webkit-transition: 0s all !important;
+}
+
+
+.x-btn {
+    font-size: 18px;
+    color: #ffffff;
+    height: 40px;
+    padding: 0px 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 3px;
+}
+
+.x-btn-small {
+    height: 30px;
+}
+
+.x-btn:hover {
+    opacity: .7
+}
+
+.x-btn-light {
+    color: #0070c9;
+    background: none;
+    border: 1px solid #0070c9;
+}
+
+.x-btn-primary {
+    color: #0070c9;
+    background-color: rgba(1, 121, 252, 0.15)
+}
+
+.x-btn-ghost {
+    color: #0070c9;
+    background: none;
+}
+
+.x-border-bottom-none {
+    border-bottom: none !important
+}
+
+
+.x-text-align-right {
+    text-align: right;
+}
+
+
+.x-alert-danger {
+    color: #d45050;
+    background-color: rgba(58, 49, 44, 0.08);
+    border-color: #ffffff;
+}
+
+
+
+.x-font-color-primary {
+    color: #5079d9;
+}
+
+.x-font-color-secondary {
+    color: #999;
+}
+
+
+
+
+
+
+.x-footer {
+    font-size: 11px;
+    line-height: 1.45455;
+    font-weight: 400;
+    letter-spacing: .005em;
+    font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Apple Legacy Chevron","Helvetica Neue","Helvetica","Arial",sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    min-width: 1200px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.x-footer a {
+    color: #555;
+    text-decoration: none;
+}
+
+.x-footer-content {
+    margin: 0 auto;
+    padding: 0 22px;
+    max-width: 1200px;
+    color: #888;
+    padding: 34px 0 21px;
+}
+
+.x-footer-shop {
+    margin-bottom: 7px;
+    padding-bottom: 6px;
+}
+
+.x-footer-locale {
+    float: right;
+    margin-top: 3px;
+    position: relative;
+    top: -3px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.x-footer-legal {
+    margin-bottom: 35px;
+}
+
+.x-footer-legal-copyright {
+    float: left;
+    margin-right: 30px;
+    float: left;
+    margin-top: 3px;
+}
+
+.x-footer-legal-links {
+    float: left;
+}
+
+.x-footer-legal-link {
+    border-right: 1px solid #d6d6d6;
+    margin-right: 10px;
+    padding-right: 12px;
+    display: inline-block;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+
+
+.x-container {
+    width: 1200px;
+    margin: 0px auto;
+    padding: 0px;
+    min-height: 800px;
+    margin-top: 64px;
+}
+
+.x-form-wrapper {
+    min-height: 662px;
+}
+
+.x-form-container {
+    width: 530px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 0px 0px 50px 0px;
+    margin: 0px auto;
+    margin-top: 150px;
+}
+
+.x-logo-image {
+    background: url(../images/logo.png) no-repeat 50% bottom;
+    height: 230px;
+    padding: 30px 0px;
+}
+
+
+.x-title {
+    font-family: xihei;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 30px;
+}
+
+.x-warning-icon {
+    width: 100%;
+    height: 27px;
+    background: url(../images/ui-p_6b80ebe114.png) -34px -590px no-repeat;
+    display: inline-block;
+    font-size: 15px;
+    padding-left: 37px;
+    line-height: 27px;
+    color: #e66f6f;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.x-input {
+    margin-top: 30px;
+    background: #fff;
+    border: #ccc solid 1px;
+    border-radius: 3px;
+    font-size: 18px;
+    opacity: .618;
+    position: relative;
+    margin: 0px auto;
+    margin-bottom: 15px;
+}
+
+.x-input .x-icon {
+    border-right: solid 1px #ccc;
+    float: left;
+    height: 46px;
+    width: 46px;
+    overflow: hidden;
+}
+
+.x-input .x-icon i {
+    background: url(../images/dialog-input-icons_e7e327a2b8.png) no-repeat;
+    background-position: -1px 0;
+    cursor: pointer;
+    display: block;
+    height: 46px;
+    text-indent: -9999em;
+    width: 46px;
+}
+
+.x-input .x-captcha {
+    width: 197px;
+    background: white;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.x-input .x-img-captcha,
+.x-input .x-refresh-captcha {
+    vertical-align: middle;
+    padding-left: 6px;
+    border-left: 1px solid #ccc;
+    float: right;
+    margin-top: 2px;
+}
+
+.x-refresh-captcha {
+    font-size: 14px;
+    height: 46px;
+    line-height: 46px;
+    width: 130px;
+    text-align: center;
+}
+
+.x-input.x-password .x-icon i {
+    background-position: -49px 0;
+}
+
+.x-input input {
+    background: rgba(255,255,255,0);
+    border: none;
+    color: #333;
+    font-size: 16px;
+    height: 46px;
+    padding: 0px 15px;
+    position: relative;
+    z-index: 10;
+    outline: none;
+    width: 366px;
+}
+
+.x-btn-link {
+    margin: 0px auto;
+    margin-top: 30px;
+    height: 25px;
+    line-height: 25px
+}
+
+.x-btn-link .x-check-box {
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 3px;
+}
+
+.x-btn-link .x-check-lable {
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    padding-left: 22px;
+    float: left !important;
+}
+
+.x-btn-link a {
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    color: #5079d9;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.x-btn-link .x-agreement a {
+    float: none;
+}
+
+.x-split:after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 11px;
+    background-color: #e5e5e5;
+    margin-left: 9px;
+    margin-top: -2px;
+    vertical-align: middle;
+}
+
+.x-btn-submit {
+    height: 46px;
+    margin: 0px auto;
+    border-radius: 5px;
+    box-shadow: none;
+    display: block;
+    background-color: #fff;
+    text-align: center;
+    line-height: 46px;
+    background: #5f7ed7;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 100;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    border: 1px solid #5f7ed7;
+}
+
+.x-quick-login a {
+    color: #5079d9;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.x-quick-login {
+    margin: 0px auto;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.x-quick-login .x-link-arrow {
+    background: url(../images/link_arrow_dbd0493592.png) 0 0 no-repeat;
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    left: 2px;
+}
+
+.x-line {
+    box-shadow: 0 1px 0 rgba(256,256,256,.4) inset;
+    border-top: 1px solid #d9d9d9;
+    width: 414px;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.x-login-three {
+    list-style: none;
+}
+
+.x-login-three li.x-text {
+    background-image: none;
+    margin-left: 0;
+    width: auto;
+    color: #bbb;
+    font-size: 100%;
+    cursor: default;
+    color: #999;
+    font-size: 14px;
+}
+
+.x-login-three li {
+    background-image: url(../images/icons_86423c6fdc.png);
+    width: 20px;
+    height: 17px;
+    margin-left: 15px;
+    float: left;
+    cursor: pointer;
+    background-size: 81px 17px;
+    background-position: 1px 0;
+    background-repeat: no-repeat;
+}
+
+.x-login-three li.wechat {
+    margin-left: 10px;
+}
+
+.x-login-three li.weibo {
+    background-position: -30px 0;
+}
+
+.x-login-three li.qq {
+    background-position: -62px 0;
+}
+
+.x-login-three li .x-extenal-link {
+    height: 20px;
+    width: 20px;
+    display: block;
+    background-color: transparent;
+}
+
+
+.x-telphone-login {
+    float: right;
+}
+
+.x-telphone-login a {
+    color: #999;
+    font-size: 14px;
+    line-height: 17px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.x-go-signin {
+    text-align: center;
+}
+
+.x-go-signin a {
+    color: #999;
+    display: block;
+    font-size: 14px;
+}
+
+.x-go-signin span {
+    color: #406dd6;
+}
+
+.x-captcha-tip p {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.x-tips {
+    height: 50px;
+    z-index: 20;
+    border: 1px solid #dadada;
+    background-color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    -webkit-box-shadow: 0 9px 30px -6px rgba(0,0,0,.2),0 18px 20px -10px rgba(0,0,0,.04),0 18px 20px -10px rgba(0,0,0,.04),0 10px 20px -10px rgba(0,0,0,.04);
+    -moz-box-shadow: 0 9px 30px -6px rgba(0,0,0,.2),0 18px 20px -10px rgba(0,0,0,.04),0 18px 20px -10px rgba(0,0,0,.04),0 10px 20px -10px rgba(0,0,0,.04);
+    box-shadow: 0 9px 30px -6px rgba(0,0,0,.2),0 18px 20px -10px rgba(0,0,0,.04),0 18px 20px -10px rgba(0,0,0,.04),0 10px 20px -10px rgba(0,0,0,.04);
+}
+
+.x-tips .x-delta {
+    background: #fcfcfc;
+    border-radius: 3px;
+    box-shadow: rgba(0,0,0,.38) 0 2px 8px;
+    float: left;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 3;
+    width: 20px;
+    height: 20px;
+    top: -6px;
+    left: 67px;
+    border: 1px solid #dadada;
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.x-tips .x-deltapatch {
+    background: #fcfcfc;
+    border-radius: 8px 0 0 8px;
+    box-shadow: none;
+    height: 45px;
+    width: 30px;
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    z-index: 4;
+}
+
+.x-tips .x-warning-icon {
+    width: 100%;
+    height: 27px;
+    background: url(../images/ui-p_6b80ebe114.png) -34px -590px no-repeat;
+    position: absolute;
+    z-index: 5;
+    float: left;
+    left: 18px;
+    top: 10px;
+    box-shadow: none;
+}
+
+.x-tips .x-message {
+    font-size: 14px;
+    z-index: 30;
+    width: auto;
+    padding: 0 0 0 15px;
+    line-height: 50px;
+    background: #fff;
+    color: #999;
+    border: 0;
+    box-shadow: none;
+    text-align: left;
+    border-radius: 14px;
+    overflow: hidden;
+    top: 0;
+    position: relative;
+    margin-left: 43px;
+    margin-right: 20px;
+}
+
+.x-tips .x-message p {
+    width: 100%;
+}
+
+
+
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: local('☺︎'), url("../fonts/myriad-set-pro_thin.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 500;
+    src: local('☺︎'), url("../fonts/myriad-set-pro_medium.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+@font-face {
+    font-family: 'Myriad Set Pro 500';
+    src: url("../fonts/myriad-set-pro_medium.eot");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/myriad-set-pro_text.eot");
+    src: local('☺︎'), url("../fonts/myriad-set-pro_text.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}

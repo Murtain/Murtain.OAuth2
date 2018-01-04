@@ -31,7 +31,7 @@ namespace Murtain.OAuth2.Web.Controllers
         }
 
         /// <summary>
-        /// Shows the error page
+        /// Render the error page
         /// </summary>
         public async Task<IActionResult> Error(string errorId)
         {

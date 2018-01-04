@@ -1,144 +1,79 @@
 ﻿@model LoginViewModel
-@*<div class="login-page">
-    <div class="page-header">
-        <h1>Login</h1>
-    </div>
-    @Html.Partial("_ValidationSummary")
-    <div class="row">
-        @if (Model.EnableLocalLogin)
-        {
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Local Login</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form asp-route="Login">
-                            <input type="hidden" asp-for="ReturnUrl" />
-                            <fieldset>
-                                <div class="form-group">
-                                    <label asp-for="Username"></label>
-                                    <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="Password"></label>
-                                    <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
-                                </div>
-                                @if (Model.AllowRememberLogin)
-                                {
-                                <div class="form-group login-remember">
-                                    <label asp-for="RememberLogin">
-                                        <input asp-for="RememberLogin">
-                                        <strong>Remember My Login</strong>
-                                    </label>
-                                </div>
-                                }
-                                <div class="form-group">
-                                    <button class="btn btn-primary" name="button" value="login">Login</button>
-                                    <button class="btn btn-default" name="button" value="cancel">Cancel</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
+@{
+    ViewData["Title"] = "账号登录";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+<div class="x-form-wrapper x-form-container">
+    <div class="animated ">
+        <form name="form" method="post" asp-route="Login">
+            <div class="form-group">
+                <div class="x-brand-conatiner">
                 </div>
             </div>
-        }
-        @if (Model.VisibleExternalProviders.Any())
-        {
-            <div class="col-md-6 col-sm-6 external-providers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">External Login</h3>
+            <div class="form-group">
+                <div class="x-title">X-DVA ID</div>
+            </div>
+            <div class="form-group">
+                @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+                {
+                    <div>
+                        <span class="x-warning-icon">There are no login schemes configured for this client.</span>
                     </div>
-                    <div class="panel-body">
-                        <ul class="list-inline">
+                }
+
+                @if (ViewContext.ModelState.Any(x => x.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid))
+                {
+                    <span class="x-warning-icon">@string.Join(",", ViewContext.ModelState.Values.FirstOrDefault()?.Errors.Select(x => x.ErrorMessage))</span>
+                }
+
+                <div class="x-input">
+                    <span class="x-icon"><i>手机号/邮箱</i></span>
+                    <input type="text" placeholder="手机号/邮箱" name="username" asp-for="Username" autofocus />
+                </div>
+                <div class="x-input x-password">
+                    <span class="x-icon"><i>密码</i></span>
+                    <input type="password" placeholder="密码" name="password" autocomplete="off" asp-for="Password" />
+                </div>
+                <div class="x-btn-link">
+                    @if (Model.AllowRememberLogin)
+                    {
+                        <input type="checkbox" class="x-check-box" name="RememberMe" value="true" asp-for="RememberLogin" />
+                        <a asp-for="RememberLogin" class="x-check-lable">
+                            7天内自动登录
+                        </a>
+                    }
+                    <a href="/account/validate-id?returnUrl=@Model.ReturnUrlEncode">立即注册</a>
+                    <a href="/account/retrive-password?returnUrl=@Model.ReturnUrlEncode" class="x-split">忘记密码</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="x-btn-submit" type="submit" name="button" value="login">登录</button>
+            </div>
+            <div class="x-line"></div>
+            <div class="form-group">
+                <ul>
+                    <li>
+                        <ul class="x-login-three">
+                            <li class="x-text">其他账号登录</li>
                             @foreach (var provider in Model.VisibleExternalProviders)
                             {
-                            <li>
-                                <a class="btn btn-default"
-                                   asp-action="ExternalLogin"
-                                   asp-route-provider="@provider.AuthenticationScheme"
-                                   asp-route-returnUrl="@Model.ReturnUrl">
-                                    @provider.DisplayName
-                                </a>
-                            </li>
+                                <li class="">
+                                    <a class="x-extenal-link"
+                                       asp-action="ExternalLogin"
+                                       asp-route-provider="@provider.AuthenticationScheme"
+                                       asp-route-returnUrl="@Model.ReturnUrl">
+                                        @provider.DisplayName
+                                    </a>
+                                </li>
                             }
                         </ul>
-                    </div>
-                </div>
+                    </li>
+                    <li class="x-telphone-login">
+                        <button class="x-btn-link-cancel" type="submit" name="button" value="login-cancel">取消登录</button>
+                        <span><i class="x-arrow"></i></span>
+                    </li>
+                </ul>
             </div>
-        }
-
+        </form>
     </div>
-</div>*@
-
-@Html.Partial("_ValidationSummary")
-@if (Model.EnableLocalLogin)
-{
-    <div class="x-form-wrapper x-form-container">
-        <div class="animated ">
-            <form name="form" method="post" asp-route="Login">
-                <i-anti-forgery-token token="model.identity.antiForgery"></i-anti-forgery-token>
-                <div class="form-group">
-                    <div class="x-brand-conatiner">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="x-title">X-DVA ID</div>
-                </div>
-                <div class="form-group">
-                    @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
-                {
-                        <div>
-                            <span class="x-warning-icon">There are no login schemes configured for this client.</span>
-                        </div>
-                    }
-                    <div class="x-input">
-                        <span class="x-icon"><i>手机号/邮箱</i></span>
-                        <input type="text" placeholder="手机号/邮箱" name="username" asp-for="Username" autofocus />
-                    </div>
-                    <div class="x-input x-password">
-                        <span class="x-icon"><i>密码</i></span>
-                        <input type="password" placeholder="密码" name="password" autocomplete="off" asp-for="Password" />
-                    </div>
-                    <div class="x-btn-link">
-                        @if (Model.AllowRememberLogin)
-                        {
-                            <input type="checkbox" class="x-check-box" name="RememberMe" value="true" asp-for="RememberLogin" />
-                            <a asp-for="RememberLogin" class="x-check-lable">
-                                7天内自动登录
-                            </a>
-                        }
-                        <a href="#/id-validate/register">立即注册</a>
-                        <a href="#/id-validate/retrieve_password" class="x-split">忘记密码</a>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="x-btn-submit" value="登录">
-                </div>
-                <div class="x-line"></div>
-                <div class="form-group">
-                    <ul>
-                        <li>
-                            <ul class="x-login-three">
-                                <li class="x-text">其他账号登录</li>
-                                @foreach (var provider in Model.VisibleExternalProviders)
-                                {
-                                    <li class="">
-                                        <a class="x-extenal-link"
-                                           asp-action="ExternalLogin"
-                                           asp-route-provider="@provider.AuthenticationScheme"
-                                           asp-route-returnUrl="@Model.ReturnUrl">
-                                            @provider.DisplayName
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
-                        </li>
-                        <li class="x-telphone-login"><a href="#">国际手机号登录<span><i class="x-arrow"></i></span></a></li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
-}
+</div>

@@ -1,68 +1,49 @@
-﻿@using IdentityServer4.Extensions
-@{
-    string name = null;
-    if (!true.Equals(ViewData["signed-out"]))
-    {
-        name = Context.User?.GetDisplayName();
-    }
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <meta name="keywords" content="科技新闻, 移动互联网, 资讯平台, 开放日, 互联网创业" />
+    <meta name="description" content="一个关注互联网的科技博客" />
 
-    <title>账号登录</title>
-
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
 
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="~/lib/animate/animate.min.css" />
     <link rel="stylesheet" href="~/lib/loading-bar/loading-bar.min.css" />
-    <link rel="stylesheet" href="~/css/index.css?v=1.2" />
+    <link rel="stylesheet" href="~/css/font.css?v=1.2" />
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/passport-c.css">
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="~/">
-                    <span class="navbar-brand">
-                        <img src="~/icon.png" class="icon-banner">
-                        IdentityServer4
-                    </span>
-                </a>
+    <div class="x-backgroud">
+        <div class='x-backgroud-frosted-glass'></div>
+        <div class="x-welcome">
+            <div class="x-welcome-text-container">
+                <div class="x-welcome-text">
+                    <p>穆轻寒</p>
+                    <p>您的 账户ID 是 392327013@qq.com</p>
+                </div>
             </div>
-
-            @if (!string.IsNullOrWhiteSpace(name))
-            {
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            }
+            <a class="x-welcome-logout x-btn"  asp-action="logout" asp-controller="account">注销</a>
         </div>
     </div>
-
-    <div class="container body-content">
-    </div>*@
-
-    @RenderBody()
+    <div class="x-nav">
+        <div class="x-nav-box">
+            <ul class="pull-left">
+                <li class="x-nav-avatar"><img src="/content/images/avtar.jpg" alt="" /></li>
+                <li class="x-nav-brand"></li>
+            </ul>
+            <ul class="pull-right">
+                <li class="active"><a href="/passport/profile">个人信息</a></li>
+                <li><a href="/passport/security">账号安全</a></li>
+                <li><a href="/grants">应用授权</a></li>
+                <li><a href="/passport/support">技术支持</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="x-container x-block">
+        @RenderBody()
+    </div>
     @Html.Partial("_Partial_Layout_Footer")
-
-    <script src="~/lib/jquery/jquery.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-    @RenderSection("scripts", required: false)
 </body>
 </html>

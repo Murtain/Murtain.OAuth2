@@ -1,0 +1,51 @@
+﻿@model ValidateIdViewModel
+@{
+    ViewData["Title"] = "账号验证";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+<div class="x-form-wrapper x-form-container">
+    <div class="animated fadeIn">
+        <form name="form" method="post" asp-route="validate-id">
+            @Html.HiddenFor(m => m.ReturnUrl)
+            <div class="form-group">
+                <div class="x-brand-conatiner">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="x-title">X-DVA ID</div>
+            </div>
+            <div class="form-group">
+                @if (ViewContext.ModelState.Any(x => x.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid))
+                {
+                    <span class="x-warning-icon">@string.Join(",", ViewContext.ModelState.Values.FirstOrDefault()?.Errors.Select(x => x.ErrorMessage))</span>
+                }
+                <div class="x-input">
+                    <span class="x-icon"><i>手机号/邮箱</i></span>
+                    <input type="text" placeholder="手机号/邮箱" value="@Model?.Mobile" asp-for="Mobile" />
+                </div>
+                <div class="x-input x-password">
+                    <span class="x-icon"><i>验证码</i></span>
+                    <input type="text" class="x-captcha" value="@Model?.GraphicCaptcha" placeholder="验证码" asp-for="GraphicCaptcha" />
+                    <img class="x-img-captcha" src="/api/captcha/1" />
+                </div>
+                <div class="x-btn-link">
+                    <p class="x-agreement">
+                        <input type="checkbox" class="x-check-box" checked="@Model?.Agreement.Equals("true")" asp-for="Agreement" />
+                        <label class="x-check-lable">我已阅读并同意遵守<a href="/" target="_blank">法律声明</a> 和<a href="/" target="_blank">隐私条款</a></label>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="x-btn-submit">
+                    <input type="submit" class="x-btn-submit" value="下一步">
+                </div>
+            </div>
+            <div class="x-line"></div>
+            <div class="form-group">
+                <p class="x-go-signin">
+                    <a href="@Model.LoginUrl" class="">如果您已拥有账号，则可在此<span>登录</span></a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

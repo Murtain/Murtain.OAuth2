@@ -11,27 +11,27 @@ using Murtain.OAuth2.Models;
 namespace IdentityServer4.Quickstart.UI
 {
     /// <summary>
-    /// This sample controller allows a user to revoke grants given to clients
+    /// This controller allows a user to revoke grants given to clients
     /// </summary>
     [SecurityHeaders]
-    [Authorize(AuthenticationSchemes = IdentityServer4.IdentityServerConstants.DefaultCookieAuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = IdentityServerConstants.DefaultCookieAuthenticationScheme)]
     public class GrantsController : Controller
     {
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IClientStore _clients;
-        private readonly IResourceStore _resources;
+        private readonly IIdentityServerInteractionService interaction;
+        private readonly IClientStore clients;
+        private readonly IResourceStore resources;
 
         public GrantsController(IIdentityServerInteractionService interaction,
             IClientStore clients,
             IResourceStore resources)
         {
-            _interaction = interaction;
-            _clients = clients;
-            _resources = resources;
+            this.interaction = interaction;
+            this.clients = clients;
+            this.resources = resources;
         }
 
         /// <summary>
-        /// Show list of grants
+        /// Render the page for grants
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -46,21 +46,21 @@ namespace IdentityServer4.Quickstart.UI
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Revoke(string clientId)
         {
-            await _interaction.RevokeUserConsentAsync(clientId);
+            await interaction.RevokeUserConsentAsync(clientId);
             return RedirectToAction("Index");
         }
 
         private async Task<GrantsViewModel> BuildViewModelAsync()
         {
-            var grants = await _interaction.GetAllUserConsentsAsync();
+            var grants = await interaction.GetAllUserConsentsAsync();
 
             var list = new List<GrantViewModel>();
             foreach (var grant in grants)
             {
-                var client = await _clients.FindClientByIdAsync(grant.ClientId);
+                var client = await clients.FindClientByIdAsync(grant.ClientId);
                 if (client != null)
                 {
-                    var resources = await _resources.FindResourcesByScopeAsync(grant.Scopes);
+                    var resources = await this.resources.FindResourcesByScopeAsync(grant.Scopes);
 
                     var item = new GrantViewModel()
                     {

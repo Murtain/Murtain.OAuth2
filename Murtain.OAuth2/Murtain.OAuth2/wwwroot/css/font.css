@@ -1,0 +1,32 @@
+﻿
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: local('☺︎'), url("../fonts/myriad-set-pro_thin.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 500;
+    src: local('☺︎'), url("../fonts/myriad-set-pro_medium.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+@font-face {
+    font-family: 'Myriad Set Pro 500';
+    src: url("../fonts/myriad-set-pro_medium.eot");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}
+
+
+@font-face {
+    font-family: 'Myriad Set Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/myriad-set-pro_text.eot");
+    src: local('☺︎'), url("../fonts/myriad-set-pro_text.woff") format("woff");
+    /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
+}

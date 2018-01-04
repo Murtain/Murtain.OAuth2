@@ -28,9 +28,9 @@ namespace Murtain.OAuth2.Configuration
             _logger = logger;
         }
 
-        public async Task<ProcessConsentResult> ProcessConsent(ConsentInputModel model)
+        public async Task<ConsentProcessResult> ProcessConsent(ConsentInputModel model)
         {
-            var result = new ProcessConsentResult();
+            var result = new ConsentProcessResult();
 
             ConsentResponse grantedConsent = null;
 

@@ -8,6 +8,7 @@
     <PackageReference Include="IdentityServer4" Version="2.0.6" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +24,6 @@
     <None Include="Views\Grants\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationSummary.cshtml" />
   </ItemGroup>
 
@@ -36,6 +36,12 @@
     <ProjectReference Include="..\Murtain.OAuth2.Domain\Murtain.OAuth2.Domain.csproj" />
     <ProjectReference Include="..\Murtain.OAuth2.Infrastructure\Murtain.OAuth2.Infrastructure.csproj" />
     <ProjectReference Include="..\Murtain.OAuth2.SDK\Murtain.OAuth2.SDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

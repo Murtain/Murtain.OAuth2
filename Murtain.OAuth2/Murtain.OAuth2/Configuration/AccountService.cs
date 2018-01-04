@@ -5,6 +5,7 @@ using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Murtain.OAuth2.Models;
+using Murtain.OAuth2.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,36 @@ namespace Murtain.OAuth2.Configuration
             _schemeProvider = schemeProvider;
             _clientStore = clientStore;
         }
+
+        public async Task<ValidateIdViewModel> BuildValidateIdViewModelAsync(string returnUrl)
+        {
+            return await Task.FromResult(new ValidateIdViewModel
+            {
+                Agreement = "true",
+                ReturnUrl = returnUrl
+            });
+        }
+        public async Task<ValidateCaptchaViewModel> BuildValidateCaptchaViewModelAsync(string returnUrl, string mobile, string graphicCaptcha)
+        {
+            return await Task.FromResult(new ValidateCaptchaViewModel
+            {
+                GraphicCaptcha = graphicCaptcha,
+                Agreement = "true",
+                Mobile = mobile,
+                ReturnUrl = returnUrl
+            });
+        }
+        public async Task<PasswordViewModel> BuildPasswordViewModelAsync(string returnUrl, string mobile, string captcha)
+        {
+            return await Task.FromResult(new PasswordViewModel
+            {
+                Mobile = mobile,
+                Captcha = captcha,
+                Agreement = "true",
+                ReturnUrl = returnUrl
+            });
+        }
+
 
         public async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
         {
@@ -82,7 +113,7 @@ namespace Murtain.OAuth2.Configuration
             };
         }
 
-        public async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
+        public async Task<LoginViewModel> BuildLoginViewModelAsync(LoginViewModel model)
         {
             var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
             vm.Username = model.Username;

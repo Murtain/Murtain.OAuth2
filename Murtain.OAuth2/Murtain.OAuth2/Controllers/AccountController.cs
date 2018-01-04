@@ -8,8 +8,12 @@ using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Murtain.AutoMapper;
+using Murtain.Extensions;
 using Murtain.OAuth2.Configuration;
 using Murtain.OAuth2.Models;
+using Murtain.OAuth2.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,68 +24,61 @@ using System.Threading.Tasks;
 namespace Murtain.OAuth2.Controllers
 {
     /// <summary>
-    /// This sample controller implements a typical login/logout/provision workflow for local and external accounts.
+    /// This controller implements a typical login/logout/provision workflow for local and external accounts.
     /// The login service encapsulates the interactions with the user data store. This data store is in-memory only and cannot be used for production!
     /// The interaction service provides a way for the UI to communicate with identityserver for validation and context retrieval
     /// </summary>
     [SecurityHeaders]
     public class AccountController : Controller
     {
-        private readonly TestUserStore _users;
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IEventService _events;
-        private readonly AccountService _account;
+        private readonly TestUserStore store;
+        private readonly IIdentityServerInteractionService interactions;
+        private readonly IEventService events;
+        private readonly AccountService accounts;
 
-        public AccountController(
-            IIdentityServerInteractionService interaction,
-            IClientStore clientStore,
-            IHttpContextAccessor httpContextAccessor,
-            IAuthenticationSchemeProvider schemeProvider,
-            IEventService events,
-            TestUserStore users = null)
+        public AccountController(IIdentityServerInteractionService interaction, IClientStore clientStore, IHttpContextAccessor httpContextAccessor, IAuthenticationSchemeProvider schemeProvider, IEventService events, ITempDataProvider tempDataProvider, TestUserStore users = null)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
-            _users = users ?? new TestUserStore(TestUsers.Users);
-            _interaction = interaction;
-            _events = events;
-            _account = new AccountService(interaction, httpContextAccessor, schemeProvider, clientStore);
+            store = users ?? new TestUserStore(TestUsers.Users);
+            interactions = interaction;
+            this.events = events;
+            accounts = new AccountService(interaction, httpContextAccessor, schemeProvider, clientStore);
         }
-
         /// <summary>
-        /// Show login page
+        /// Render the page for login
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
             // build a model so we know what to show on the login page
-            var vm = await _account.BuildLoginViewModelAsync(returnUrl);
+            var vm = await accounts.BuildLoginViewModelAsync(returnUrl);
 
             if (vm.IsExternalLoginOnly)
             {
                 // we only have one option for logging in and it's an external provider
                 return await ExternalLogin(vm.ExternalLoginScheme, returnUrl);
             }
-
+            TempData["ReturnUrl"] = returnUrl;
             return View(vm);
         }
-
         /// <summary>
         /// Handle postback from username/password login
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginInputModel model, string button)
+        [Route("account/login")]
+        public async Task<IActionResult> Login(LoginViewModel model, string button)
         {
             if (button != "login")
             {
                 // the user clicked the "cancel" button
-                var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
+                var context = await interactions.GetAuthorizationContextAsync(model.ReturnUrl);
                 if (context != null)
                 {
                     // if the user cancels, send a result back into IdentityServer as if they 
                     // denied the consent (even if this client does not require consent).
                     // this will send back an access denied OIDC error response to the client.
-                    await _interaction.GrantConsentAsync(context, ConsentResponse.Denied);
+                    await interactions.GrantConsentAsync(context, ConsentResponse.Denied);
 
                     // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
                     return Redirect(model.ReturnUrl);
@@ -93,46 +90,143 @@ namespace Murtain.OAuth2.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
-                {
-                    var user = _users.FindByUsername(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username));
-
-                    // only set explicit expiration here if user chooses "remember me". 
-                    // otherwise we rely upon expiration configured in cookie middleware.
-                    AuthenticationProperties props = null;
-                    if (AccountOptions.AllowRememberLogin && model.RememberLogin)
-                    {
-                        props = new AuthenticationProperties
-                        {
-                            IsPersistent = true,
-                            ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
-                        };
-                    };
-
-                    // issue authentication cookie with subject ID and username
-                    await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
-
-                    // make sure the returnUrl is still valid, and if so redirect back to authorize endpoint or a local page
-                    if (_interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-
-                    return Redirect("~/");
-                }
-
-                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials"));
-
-                ModelState.AddModelError("", AccountOptions.InvalidCredentialsErrorMessage);
+                // something went wrong, show form with error
+                var vm = await accounts.BuildLoginViewModelAsync(model);
+                await ModelStateCleanAsync(vm);
+                return View(vm);
             }
 
-            // something went wrong, show form with error
-            var vm = await _account.BuildLoginViewModelAsync(model);
+            // validate username/password against in-memory store
+            if (!store.ValidateCredentials(model.Username, model.Password))
+            {
+                await events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials"));
+                ModelState.AddModelError("", AccountOptions.InvalidCredentialsErrorMessage);
+
+                // something went wrong, show form with error
+                var vm = await accounts.BuildLoginViewModelAsync(model);
+                return View(vm);
+            }
+
+            var user = store.FindByUsername(model.Username);
+            await events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username));
+
+            // only set explicit expiration here if user chooses "remember me". 
+            // otherwise we rely upon expiration configured in cookie middleware.
+            AuthenticationProperties props = null;
+            if (AccountOptions.AllowRememberLogin && model.RememberLogin)
+            {
+                props = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
+                };
+            };
+
+            // issue authentication cookie with subject ID and username
+            await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
+
+            // make sure the returnUrl is still valid, and if so redirect back to authorize endpoint or a local page
+            if (interactions.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
+            {
+                return Redirect(model.ReturnUrl);
+            }
+
+            return Redirect("~/");
+        }
+
+        /// <summary>
+        /// Render the page for validate user identity
+        /// </summary>
+        /// <returns></returns>
+        [Route("account/validate-id")]
+        public async Task<IActionResult> ValidateID(string returnUrl)
+        {
+            var vm = await accounts.BuildValidateIdViewModelAsync(returnUrl);
             return View(vm);
+        }
+        /// <summary>
+        /// Post processing of validate user identity 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("account/validate-id")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ValidateID(ValidateIdInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                var vm = input.MapTo<ValidateIdViewModel>();
+                await ModelStateCleanAsync(vm);
+                return View(vm);
+            }
+
+            TempData["Mobile"] = input.Mobile;
+            TempData["GraphicCaptcha"] = input.GraphicCaptcha;
+            return RedirectToAction("validate-captcha", "account", new { returnUrl = input.ReturnUrl });
+        }
+
+        /// <summary>
+        /// Render the validate message captcha page 
+        /// </summary>
+        /// <returns></returns>
+        [Route("account/validate-captcha")]
+        public async Task<IActionResult> ValidateCaptcha(string returnUrl)
+        {
+            var vm = await accounts.BuildValidateCaptchaViewModelAsync(returnUrl, TempData["Mobile"] as string, TempData["GraphicCaptcha"] as string);
+            return View(vm);
+        }
+        /// <summary>
+        /// Post processing of validate message captcha
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("account/validate-captcha")]
+        public async Task<IActionResult> ValidateCaptcha(ValidateCaptchaInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                var vm = input.MapTo<ValidateCaptchaViewModel>();
+                await ModelStateCleanAsync(vm);
+                return View(vm);
+            }
+            TempData["Mobile"] = input.Mobile;
+            TempData["Captcha"] = input.Captcha;
+            return RedirectToAction("password", "account", new { returnUrl = input.ReturnUrl });
+        }
+
+        /// <summary>
+        /// Render the password page
+        /// </summary>
+        /// <returns></returns>
+        [Route("account/password")]
+        public async Task<IActionResult> Password(string returnUrl)
+        {
+            var vm = await accounts.BuildPasswordViewModelAsync(returnUrl, TempData["Mobile"] as string, TempData["Captcha"] as string);
+            return View(vm);
+        }
+        /// <summary>
+        ///  Post processing of set password
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("account/password")]
+        public async Task<IActionResult> Password(PasswordInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                var vm = input.MapTo<PasswordViewModel>();
+                await ModelStateCleanAsync(vm);
+                return View(vm);
+            }
+
+            return RedirectToAction("login", "account", new { returnUrl = input.ReturnUrl });
         }
 
         /// <summary>
@@ -193,7 +287,6 @@ namespace Murtain.OAuth2.Controllers
                 return Challenge(props, provider);
             }
         }
-
         /// <summary>
         /// Post processing of external authentication
         /// </summary>
@@ -234,12 +327,12 @@ namespace Murtain.OAuth2.Controllers
             // external provider's authentication result, and provision the user as you see fit.
             // 
             // check if the external user is already provisioned
-            var user = _users.FindByExternalProvider(provider, userId);
+            var user = store.FindByExternalProvider(provider, userId);
             if (user == null)
             {
                 // this sample simply auto-provisions new external user
                 // another common approach is to start a registrations workflow first
-                user = _users.AutoProvisionUser(provider, userId, claims);
+                user = store.AutoProvisionUser(provider, userId, claims);
             }
 
             var additionalClaims = new List<Claim>();
@@ -262,7 +355,7 @@ namespace Murtain.OAuth2.Controllers
             }
 
             // issue authentication cookie for user
-            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, userId, user.SubjectId, user.Username));
+            await events.RaiseAsync(new UserLoginSuccessEvent(provider, userId, user.SubjectId, user.Username));
             await HttpContext.SignInAsync(user.SubjectId, user.Username, provider, props, additionalClaims.ToArray());
 
             // delete temporary cookie used during external authentication
@@ -270,7 +363,7 @@ namespace Murtain.OAuth2.Controllers
 
             // validate return URL and redirect back to authorization endpoint or a local page
             var returnUrl = result.Properties.Items["returnUrl"];
-            if (_interaction.IsValidReturnUrl(returnUrl) || Url.IsLocalUrl(returnUrl))
+            if (interactions.IsValidReturnUrl(returnUrl) || Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
@@ -279,13 +372,13 @@ namespace Murtain.OAuth2.Controllers
         }
 
         /// <summary>
-        /// Show logout page
+        /// Render the page for logout
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Logout(string logoutId)
         {
             // build a model so the logout page knows what to display
-            var vm = await _account.BuildLogoutViewModelAsync(logoutId);
+            var vm = await accounts.BuildLogoutViewModelAsync(logoutId);
 
             if (vm.ShowLogoutPrompt == false)
             {
@@ -296,7 +389,6 @@ namespace Murtain.OAuth2.Controllers
 
             return View(vm);
         }
-
         /// <summary>
         /// Handle logout page postback
         /// </summary>
@@ -305,7 +397,7 @@ namespace Murtain.OAuth2.Controllers
         public async Task<IActionResult> Logout(LogoutInputModel model)
         {
             // build a model so the logged out page knows what to display
-            var vm = await _account.BuildLoggedOutViewModelAsync(model.LogoutId);
+            var vm = await accounts.BuildLoggedOutViewModelAsync(model.LogoutId);
 
             var user = HttpContext.User;
             if (user?.Identity.IsAuthenticated == true)
@@ -314,7 +406,7 @@ namespace Murtain.OAuth2.Controllers
                 await HttpContext.SignOutAsync();
 
                 // raise the logout event
-                await _events.RaiseAsync(new UserLogoutSuccessEvent(user.GetSubjectId(), user.GetDisplayName()));
+                await events.RaiseAsync(new UserLogoutSuccessEvent(user.GetSubjectId(), user.GetDisplayName()));
             }
 
             // check if we need to trigger sign-out at an upstream identity provider
@@ -330,6 +422,30 @@ namespace Murtain.OAuth2.Controllers
             }
 
             return View("LoggedOut", vm);
+        }
+
+        /// <summary>
+        /// Clean model state validate errors
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private async Task ModelStateCleanAsync(object model)
+        {
+            var properties = model.GetType().GetProperties().Select(x => x.Name).ToList();
+
+            var error = ModelState
+                    .Where(x => x.Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid)
+                    .Select(m => new { Order = properties.IndexOf(m.Key), Error = m.Value, Key = m.Key })
+                    .OrderBy(m => m.Order)
+                    .FirstOrDefault();
+
+            if (error != null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(error.Key, string.Join(",", error.Error.Errors.Select(x => x.ErrorMessage)));
+            }
+
+            await Task.FromResult(0);
         }
     }
 }

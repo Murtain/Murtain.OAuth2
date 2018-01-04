@@ -1,20 +1,29 @@
 ﻿@model LogoutViewModel
-
-<div class="logout-page">
-    <div class="page-header">
-        <h1>Logout</h1>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6">
-            <p>Would you like to logout of IdentityServer?</p>
-            <form asp-action="Logout">
-                <input type="hidden" name="logoutId" value="@Model.LogoutId"  />
-                <fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Yes</button>
+@{
+    ViewData["Title"] = "退出登录";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+<div class="x-container x-block animated">
+    <div class="x-form-wrapper x-form-container">
+        <div class="animated ">
+            <form name="form" method="post" asp-action="logout">
+                <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+                <div class="form-group">
+                    <div class="x-brand-conatiner">
                     </div>
-                </fieldset>
+                </div>
+                <div class="form-group">
+                    <div class="x-title">X-DVA 安全退出</div>
+                </div>
+                <div class="form-group">
+                    <div>立即退出会清除您的登录信息，重新访问时需重新授权登录，确定要退出么？</div>
+                </div>
+                <div class="form-group">
+                    <div>An immediate exit will clear your login information. You will need to re - sign the login when you re - visit. Are you sure you want to logout?</div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="x-btn x-btn-submit x-btn-light" value="立即退出">
+                </div>
             </form>
         </div>
     </div>

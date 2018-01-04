@@ -120,7 +120,9 @@ namespace Murtain.OAuth2
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseMurtain();
+            app.UseMurtain()
+               .UseAutoMapper();
+
             app.UseIdentityServer();
             app.UseStaticFiles();
 
@@ -128,7 +130,7 @@ namespace Murtain.OAuth2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Passport}/{action=Index}/{id?}");
             });
         }
     }

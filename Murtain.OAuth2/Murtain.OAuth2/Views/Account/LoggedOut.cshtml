@@ -1,28 +1,38 @@
 ﻿@model LoggedOutViewModel
+@{
 
-@{ 
+    ViewData["Title"] = "退出登录";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+
     // set this so the layout rendering sees an anonymous user
     ViewData["signed-out"] = true;
 }
 
-<div class="page-header logged-out">
-    <h1>
-        Logout
-        <small>You are now logged out</small>
-    </h1>
-
-    @if (Model.PostLogoutRedirectUri != null)
-    {
-        <div>
-            Click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">here</a> to return to the
-            <span>@Model.ClientName</span> application.
+<div class="x-container x-block animated">
+    <div class="x-form-wrapper x-form-container">
+        <div class="animated ">
+            <div class="form-group">
+                <div class="x-brand-conatiner">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="x-title">X-DVA 安全退出</div>
+            </div>
+            <div class="form-group">
+                <div>您已经成功退出登录！点击<a href="@Model.PostLogoutRedirectUri">这里</a> 返回 @Model.ClientName</div>
+            </div>
+            <div class="form-group">
+                <div>You are now logged out. Click <a href="@Model.PostLogoutRedirectUri">here</a> to return to the @Model.ClientName</div>
+            </div>
+            <div class="form-group">
+                <a href="/home" class="x-btn x-btn-submit x-btn-light">我知道了</a>
+            </div>
+            @if (Model.SignOutIframeUrl != null)
+            {
+                <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+            }
         </div>
-    }
-
-    @if (Model.SignOutIframeUrl != null)
-    {
-        <iframe width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
-    }
+    </div>
 </div>
 
 @section scripts

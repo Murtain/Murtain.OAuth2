@@ -4,9 +4,9 @@ D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netc
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.dll
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.dll
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.OAuth2.SDK.dll
+D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.pdb
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.OAuth2.Domain.pdb
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.OAuth2.SDK.pdb
-D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\bin\Debug\netcoreapp2.0\Murtain.pdb
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Core.csprojResolveAssemblyReference.cache
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Core.csproj.CoreCompileInputs.cache
 D:\200__Murtain\Murtain.OAuth2\Murtain.OAuth2\Murtain.OAuth2.Core\obj\Debug\netcoreapp2.0\Murtain.OAuth2.Core.AssemblyInfoInputs.cache
